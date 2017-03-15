@@ -17,6 +17,7 @@
 
 #define MAT_INV "\nMateria invalida"
 #define ALU_INV "\nAluno não encontrado no sistema"
+#define PRO_INV "\nProfessor não encontrado no sistema"
 
 #define A_RA_VS_NOME "\nCadastrar por nome (0) ou ra (1)"
 #define P_RA_VS_NOME "\nCadastrar por nome (0) ou matricula (1)"

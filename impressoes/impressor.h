@@ -21,6 +21,8 @@
 #define P_INV "\nProfessor nao encontrado"
 #define M_INV "\nMateria nao encontrada"
 
+#define N_MAT "\nNome da materia:"
+
 PUBLIC void impressoes(Mats materias[], No *pessoas);
 
 #endif /* IMPRESSOES_IMPRESSOR_H_ */

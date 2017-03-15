@@ -54,7 +54,8 @@ PRIVATE void matricular_aluno(Mats materias[], No *pessoas) {
 				tmp = pessoas->prox;
 				while (tmp != NULL) {
 					if (strcmp(tmp->primeiroNome, p_nome) == 0
-							&& strcmp(tmp->ultimoNome, u_nome) == 0) {
+							&& strcmp(tmp->ultimoNome, u_nome) == 0
+							&& tmp->func == 1) {
 						//printf("%s", tmp->materias[0].n_materia);
 						while (1 == 1) {
 							printf(W_MAT_VINCULAR);
@@ -71,8 +72,8 @@ PRIVATE void matricular_aluno(Mats materias[], No *pessoas) {
 										strcpy(tmp->materias[i].n_materia,
 												n_mat);
 										att_materia(n_mat, materias);
+										break;
 									}
-									break;
 								}
 							} else {
 								// @TODO implementar o else
@@ -103,7 +104,7 @@ PRIVATE void matricular_aluno(Mats materias[], No *pessoas) {
 				No *tmp;
 				tmp = pessoas->prox;
 				while (tmp != NULL) {
-					if (tmp->ra_mtr == ra) {
+					if (tmp->ra_mtr == ra && tmp->func == 1) {
 						printf("\nAluno %s %s", tmp->primeiroNome, tmp->ultimoNome);
 						//printf("%s", tmp->materias[0].n_materia);
 						while (1 == 1) {
@@ -121,8 +122,8 @@ PRIVATE void matricular_aluno(Mats materias[], No *pessoas) {
 										strcpy(tmp->materias[i].n_materia,
 												n_mat);
 										att_materia(n_mat, materias);
+										break;
 									}
-									break;
 								}
 							} else {
 								// @TODO implementar o else
@@ -176,7 +177,7 @@ PRIVATE void matricular_prof(Mats materias[], No *pessoas) {
 		char p_nome[MAX_NOME_TAM], u_nome[MAX_NOME_TAM], n_mat[MAX_NOME_TAM];
 		unsigned long long mtr;
 		while (1 == 1) {
-			printf(A_RA_VS_NOME);
+			printf(P_RA_VS_NOME);
 			scanf("%i", &opt_ra);
 			switch (opt_ra) {
 			case 0:
@@ -191,7 +192,8 @@ PRIVATE void matricular_prof(Mats materias[], No *pessoas) {
 					tmp = pessoas->prox;
 					while (tmp != NULL) {
 						if (strcmp(tmp->primeiroNome, p_nome) == 0
-								&& strcmp(tmp->ultimoNome, u_nome) == 0) {
+								&& strcmp(tmp->ultimoNome, u_nome) == 0
+								&& tmp->func == 0) {
 							//printf("%s", tmp->materias[0].n_materia);
 							while (1 == 1) {
 								printf(W_MAT_VINCULAR);
@@ -208,8 +210,8 @@ PRIVATE void matricular_prof(Mats materias[], No *pessoas) {
 											strcpy(tmp->materias[i].n_materia,
 													n_mat);
 											att_materia(n_mat, materias);
+											break;
 										}
-										break;
 									}
 								} else {
 									// @TODO implementar o else
@@ -227,7 +229,7 @@ PRIVATE void matricular_prof(Mats materias[], No *pessoas) {
 						}
 						tmp = tmp->prox;
 					}
-					printf(ALU_INV);
+					printf(PRO_INV);
 					return;
 				}
 				break;
@@ -240,7 +242,7 @@ PRIVATE void matricular_prof(Mats materias[], No *pessoas) {
 					No *tmp;
 					tmp = pessoas->prox;
 					while (tmp != NULL) {
-						if (tmp->ra_mtr == mtr) {
+						if (tmp->ra_mtr == mtr && tmp->func == 0) {
 							printf("\nProfessor %s %s", tmp->primeiroNome, tmp->ultimoNome);
 							//printf("%s", tmp->materias[0].n_materia);
 							while (1 == 1) {
@@ -258,8 +260,8 @@ PRIVATE void matricular_prof(Mats materias[], No *pessoas) {
 											strcpy(tmp->materias[i].n_materia,
 													n_mat);
 											att_materia(n_mat, materias);
+											break;
 										}
-										break;
 									}
 								} else {
 									// @TODO implementar o else
@@ -277,7 +279,7 @@ PRIVATE void matricular_prof(Mats materias[], No *pessoas) {
 						}
 						tmp = tmp->prox;
 					}
-					printf(ALU_INV);
+					printf(PRO_INV);
 					return;
 				}
 				break;

@@ -7,10 +7,12 @@
 #include "impressor.h"
 
 PRIVATE void imprime_materias(Mats materias[]);
+PRIVATE void imprime_pessoas(char materia[], No *pessoas);
 
 PUBLIC void impressoes(Mats materias[], No *pessoas) {
 	int opt = -1, cnt;
 	unsigned long long ra_mtr;
+	char nome_mat[MAX_NOME_TAM];
 	printf(OPT_IMP);
 	printf(OPT_IMP_2);
 	printf(OPT_IMP_3);
@@ -54,14 +56,12 @@ PUBLIC void impressoes(Mats materias[], No *pessoas) {
 			printf(P_INV);
 			return;
 		case 3:
-			printf("Disciplinas:\n");
+			printf("\nDisciplinas:\n");
 			for (cnt = 0; cnt < MAX_VET; cnt++) {
 				if (materias[cnt].exist == TRUE) {
 					printf("%s\n", materias[cnt].n_materia);
-					return;
 				}
 			}
-			printf(M_INV);
 			return;
 		case 4:
 			printf(N_RA);
@@ -76,8 +76,9 @@ PUBLIC void impressoes(Mats materias[], No *pessoas) {
 
 						printf("\nAluno %s %s", tmp->primeiroNome,
 								tmp->ultimoNome);
-						//printf("%s", tmp->materias[0].n_materia);
+						//printf("\n%s", tmp->materias[1].n_materia);
 						imprime_materias(tmp->materias);
+						return;
 					}
 				}
 				tmp = tmp->prox;
@@ -85,7 +86,14 @@ PUBLIC void impressoes(Mats materias[], No *pessoas) {
 			printf(ALU_INV);
 			return;
 		case 5:
-			break;
+			printf(N_MAT);
+			scanf("%s", nome_mat);
+			for (cnt = 0; cnt < MAX_VET; cnt++) {
+				if (strcmp(materias[cnt].n_materia, nome_mat) == 0) {
+					imprime_pessoas(nome_mat, pessoas);
+				}
+			}
+			return;
 		case 6:
 			printf(N_MTR);
 			scanf("%llu", &ra_mtr);
@@ -117,10 +125,14 @@ PUBLIC void impressoes(Mats materias[], No *pessoas) {
 
 PRIVATE void imprime_materias(Mats materias[]) {
 	int cnt;
-	printf("Disciplinas:\n");
+	printf("\nDisciplinas:\n");
 	for (cnt = 0; cnt < MAX_VET; cnt++) {
-		if (materias[cnt].exist == TRUE) {
+		if (strcmp(materias[cnt].n_materia, "false") != 0) {
 			printf("%s\n", materias[cnt].n_materia);
 		}
 	}
+}
+
+PRIVATE void imprime_pessoas(char materia[], No *pessoas) {
+	printf("%s", materia);
 }
