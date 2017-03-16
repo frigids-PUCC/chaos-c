@@ -18,7 +18,8 @@ PUBLIC No *aloca_prof();
  * */
 PUBLIC void cadastro_prof(No *pessoas) {
 	No *new = aloca_prof();
-	printf("\nCadastrado professor: %s %s, matricula: %llu\n", new->primeiroNome, new->ultimoNome, new->ra_mtr);
+	printf("\nCadastrado professor: %s %s, matricula: %llu\n",
+			new->primeiroNome, new->ultimoNome, new->ra_mtr);
 	new->prox = NULL;
 
 	if (vazia(pessoas)) {
@@ -34,14 +35,18 @@ PUBLIC void cadastro_prof(No *pessoas) {
 }
 
 PUBLIC No *aloca_prof() {
-	No *novo = (No*) malloc(sizeof(No));
+	int i;
 	struct timeval tv;
-	gettimeofday(&tv,NULL);
+	gettimeofday(&tv, NULL);
 
-	unsigned long long matricula =
-	    (unsigned long long)(tv.tv_sec) * 1000 +
-	    (unsigned long long)(tv.tv_usec) / 1000;
-
+	unsigned long long ra = (unsigned long long) (tv.tv_sec) * 1000
+			+ (unsigned long long) (tv.tv_usec) / 1000;
+	No *novo = (No*) malloc(sizeof(No));
+	char *nome = malloc(MAX_NOME_TAM);
+	Mats tmp_mat;
+	tmp_mat.count_alunos = 0;
+	tmp_mat.exist = FALSE;
+	strcpy(tmp_mat.n_materia, "false");
 	if (!novo) {
 		printf("Sem memoria disponivel!\n");
 		exit(1);
@@ -49,9 +54,14 @@ PUBLIC No *aloca_prof() {
 		printf(P_NOME_PROF);
 		scanf("%s", novo->primeiroNome);
 		printf(U_NOME_PROF);
+
 		scanf("%s", novo->ultimoNome);
+		for (i = 0; i < MAX_VET; i++) {
+			novo->materias[i] = tmp_mat;
+		}
 		novo->func = PROFESSOR;
-		novo->ra_mtr = matricula;
+		novo->ra_mtr = ra;
 		return novo;
 	}
+
 }

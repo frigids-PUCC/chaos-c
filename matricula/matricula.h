@@ -12,8 +12,11 @@
 #include <string.h>
 #include "../cadastro/cadastro.h"
 
-#define OPTS "\nDigite 1 p/ vincular aluno, ou 2 para professor:"
+#define OPTS "\nDigite 1 p/ vincular aluno, 2 para vincular professor, ou 3 para cancelar uma matricula: "
 #define OPTS_ERR "\nOpção inválida\n"
+
+#define RMV_RA "\nNumero do RA do aluno:"
+#define RMV_MAT "\nNome da materia:"
 
 #define MAT_INV "\nMateria invalida"
 #define ALU_INV "\nAluno não encontrado no sistema"

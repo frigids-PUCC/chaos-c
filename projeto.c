@@ -61,16 +61,6 @@ PRIVATE void control_opt() {
 		case 5:
 			impressoes(materias, pessoas);
 			break;
-		case 6:
-
-			break;
-		case 7:
-			printf("Disciplinas:\n");
-			for (i = 0; i < MAX_VET; i++) {
-				if (materias[i].exist == TRUE)
-					printf("%s\n", materias[i].n_materia);
-			}
-			break;
 		default:
 			break;
 		}

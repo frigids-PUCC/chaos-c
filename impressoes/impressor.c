@@ -7,7 +7,7 @@
 #include "impressor.h"
 
 PRIVATE void imprime_materias(Mats materias[]);
-PRIVATE void imprime_pessoas(char materia[], No *pessoas);
+PRIVATE void imprime_pessoas(char materia[], No *pessoas, int flag);
 
 PUBLIC void impressoes(Mats materias[], No *pessoas) {
 	int opt = -1, cnt;
@@ -30,12 +30,10 @@ PUBLIC void impressoes(Mats materias[], No *pessoas) {
 					if (tmp->func == ALUNO) {
 						printf("%s %s, ra: %llu\n", tmp->primeiroNome,
 								tmp->ultimoNome, tmp->ra_mtr);
-						return;
 					}
 					tmp = tmp->prox;
 				}
 			}
-			printf(A_INV);
 			return;
 		case 2:
 			printf("\nProfessores:\n");
@@ -46,14 +44,12 @@ PUBLIC void impressoes(Mats materias[], No *pessoas) {
 				tmp = pessoas->prox;
 				while (tmp != NULL) {
 					if (tmp->func == PROFESSOR) {
-						printf("%s %s, ra: %llu\n", tmp->primeiroNome,
+						printf("%s %s, matricula: %llu\n", tmp->primeiroNome,
 								tmp->ultimoNome, tmp->ra_mtr);
-						return;
 					}
 					tmp = tmp->prox;
 				}
 			}
-			printf(P_INV);
 			return;
 		case 3:
 			printf("\nDisciplinas:\n");
@@ -76,21 +72,19 @@ PUBLIC void impressoes(Mats materias[], No *pessoas) {
 
 						printf("\nAluno %s %s", tmp->primeiroNome,
 								tmp->ultimoNome);
-						//printf("\n%s", tmp->materias[1].n_materia);
 						imprime_materias(tmp->materias);
 						return;
 					}
+					tmp = tmp->prox;
 				}
-				tmp = tmp->prox;
 			}
-			printf(ALU_INV);
 			return;
 		case 5:
 			printf(N_MAT);
 			scanf("%s", nome_mat);
 			for (cnt = 0; cnt < MAX_VET; cnt++) {
 				if (strcmp(materias[cnt].n_materia, nome_mat) == 0) {
-					imprime_pessoas(nome_mat, pessoas);
+					imprime_pessoas(nome_mat, pessoas, 1);
 				}
 			}
 			return;
@@ -106,16 +100,22 @@ PUBLIC void impressoes(Mats materias[], No *pessoas) {
 					if (tmp->ra_mtr == ra_mtr) {
 						printf("\nProfessor %s %s", tmp->primeiroNome,
 								tmp->ultimoNome);
-						//printf("%s", tmp->materias[0].n_materia);
 						imprime_materias(tmp->materias);
 					}
+
+					tmp = tmp->prox;
 				}
-				tmp = tmp->prox;
 			}
-			printf(ALU_INV);
 			return;
 		case 7:
-			break;
+			printf(N_MAT);
+			scanf("%s", nome_mat);
+			for (cnt = 0; cnt < MAX_VET; cnt++) {
+				if (strcmp(materias[cnt].n_materia, nome_mat) == 0) {
+					imprime_pessoas(nome_mat, pessoas, 0);
+				}
+			}
+			return;
 		default:
 			break;
 
@@ -133,6 +133,22 @@ PRIVATE void imprime_materias(Mats materias[]) {
 	}
 }
 
-PRIVATE void imprime_pessoas(char materia[], No *pessoas) {
-	printf("%s", materia);
+PRIVATE void imprime_pessoas(char materia[], No *pessoas, int flag) {
+	int i;
+	if (vazia(pessoas)) {
+		printf("Lista vazia");
+	} else {
+		No *tmp;
+		tmp = pessoas->prox;
+		while (tmp != NULL) {
+			if (tmp->func == flag) {
+				for (i = 0; i < MAX_VET; i++) {
+					if (strcmp(materia, tmp->materias[i].n_materia) == 0) {
+						printf("\n%s %s\n", tmp->primeiroNome, tmp->ultimoNome);
+					}
+				}
+			}
+			tmp = tmp->prox;
+		}
+	}
 }

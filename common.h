@@ -21,8 +21,7 @@
 #define WELCOME            "Chaos Faculdade\n"
 #define GET_OPTION		   "Entre com a opção:"
 #define OPTIONS_CADASTRO   "1) Cadastrar Aluno\n" "2)Cadastrar Professor\n" "3)Cadastrar Materia\n"
-#define OPTIONS_IMPS       "\n5) Impressoes"
-#define OPTIONS_MANAGE     "4) Realizar Matricula\n"
+#define OPTIONS_MANAGE     "4) Realizar Matricula\n" "5) Impressoes\n"
 
 // warning
 #define TOO_MUCH_P "Muitas pessoas cadastradas\n"
